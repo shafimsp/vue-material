@@ -21,9 +21,9 @@
       <md-input v-model="withLabel" placeholder="A nice placeholder"></md-input>
     </md-field>
 
-    <md-field md-inline>
-      <label>Inline</label>
+    <md-field md-layout="box">
       <md-input v-model="inline"></md-input>
+      <label>Inline</label>
     </md-field>
 
     <md-field>

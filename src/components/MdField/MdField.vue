@@ -24,6 +24,7 @@
   import MdClearIcon from 'core/icons/MdClearIcon'
   import MdPasswordOffIcon from 'core/icons/MdPasswordOffIcon'
   import MdPasswordOnIcon from 'core/icons/MdPasswordOnIcon'
+  import MdPropValidator from 'core/utils/MdPropValidator'
 
   export default new MdComponent({
     name: 'MdField',
@@ -34,6 +35,10 @@
     },
     props: {
       mdInline: Boolean,
+      mdLayout: {
+        type: String,
+        default: 'floating'
+      },
       mdClearable: Boolean,
       mdCounter: {
         type: Boolean,
@@ -69,6 +74,18 @@
       }
     },
     computed: {
+      isFloatingLayout () {
+        return this.mdLayout === 'floating'
+      },
+      isInlineLayout () {
+        return this.mdLayout === 'inline'
+      },
+      isBoxLayout () {
+        return this.mdLayout === 'box'
+      },
+      isRaisedLayout () {
+        return this.mdLayout === 'raised'
+      },
       stringValue () {
         return this.MdField.value && this.MdField.value.toString()
       },
@@ -90,7 +107,9 @@
       },
       fieldClasses () {
         return {
-          'md-inline': this.mdInline,
+          'md-inline': this.isInlineLayout || this.isRaisedLayout,
+          'md-raised': this.isRaisedLayout,
+          'md-box': this.isBoxLayout,
           'md-clearable': this.mdClearable,
           'md-focused': this.MdField.focused,
           'md-highlight': this.MdField.highlighted,
@@ -124,6 +143,8 @@
 
 <style lang="scss">
   @import "~components/MdAnimation/variables";
+  @import "~components/MdElevation/mixins";
+  @import "~components/MdLayout/mixins";
 
   $md-input-height: 32px;
 
@@ -420,6 +441,76 @@
         label {
           opacity: 0;
         }
+      }
+    }
+
+    &.md-box {
+      border-radius: 4px;
+      min-height: 56px;
+      padding-top: 23px;
+
+      &:before,
+      &:after{
+        border-radius: 0 0 4px 4px;
+      }
+
+      &:after {
+        height: 2px;
+      }
+
+      .md-input {
+        padding-left: 16px;
+      }
+
+      label {
+        left: 16px;
+        top: 18px;
+      }
+
+      &.md-focused,
+      &.md-has-value {
+        label {
+          left: 16px;
+          top: 6px;
+        }
+      }
+
+    }
+
+    &.md-raised {
+      @include md-elevation(2);
+      padding-top: 2px;
+      border-radius: 2px;
+      align-items: center;
+
+      &.md-focused {
+        z-index: 120;
+      }
+
+      &:before,
+      &:after {
+        display: none;
+      }
+
+      .md-input {
+        padding-left: 16px;
+      }
+
+      &.md-focused label,
+      label,
+      .md-input-action {
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .md-input-action {
+        right: 8px;
+      }
+
+      &.md-focused label,
+      label {
+        margin-top: 2px;
+        left: 16px;
       }
     }
 
