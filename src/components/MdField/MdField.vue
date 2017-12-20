@@ -467,11 +467,26 @@
         top: 18px;
       }
 
+      .md-helper-text,
+      .md-error {
+        left: 16px;
+      }
+
+      .md-count {
+        right: 16px;
+      }
+
       &.md-focused,
       &.md-has-value {
         label {
           left: 16px;
           top: 6px;
+        }
+      }
+
+      &.md-disabled {
+        &:after {
+          display: none;
         }
       }
 
