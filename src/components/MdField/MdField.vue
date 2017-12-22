@@ -107,7 +107,7 @@
       },
       fieldClasses () {
         return {
-          'md-inline': this.isInlineLayout || this.isRaisedLayout,
+          'md-inline': this.mdInline || this.isRaisedLayout,
           'md-raised': this.isRaisedLayout,
           'md-box': this.isBoxLayout,
           'md-clearable': this.mdClearable,
@@ -444,91 +444,6 @@
       }
     }
 
-    &.md-box {
-      border-radius: 4px;
-      min-height: 56px;
-      padding-top: 23px;
-
-      &:before,
-      &:after{
-        border-radius: 0 0 4px 4px;
-      }
-
-      &:after {
-        height: 2px;
-      }
-
-      .md-input {
-        padding-left: 16px;
-      }
-
-      label {
-        left: 16px;
-        top: 18px;
-      }
-
-      .md-helper-text,
-      .md-error {
-        left: 16px;
-      }
-
-      .md-count {
-        right: 16px;
-      }
-
-      &.md-focused,
-      &.md-has-value {
-        label {
-          left: 16px;
-          top: 6px;
-        }
-      }
-
-      &.md-disabled {
-        &:after {
-          display: none;
-        }
-      }
-
-    }
-
-    &.md-raised {
-      @include md-elevation(2);
-      padding-top: 2px;
-      border-radius: 2px;
-      align-items: center;
-
-      &.md-focused {
-        z-index: 120;
-      }
-
-      &:before,
-      &:after {
-        display: none;
-      }
-
-      .md-input {
-        padding-left: 16px;
-      }
-
-      &.md-focused label,
-      label,
-      .md-input-action {
-        top: 50%;
-        transform: translateY(-50%);
-      }
-
-      .md-input-action {
-        right: 8px;
-      }
-
-      &.md-focused label,
-      label {
-        margin-top: 2px;
-        left: 16px;
-      }
-    }
-
     &.md-disabled {
       &:after {
         background: bottom left repeat-x;
@@ -603,6 +518,179 @@
         content: "*";
         line-height: 1em;
         vertical-align: top;
+      }
+    }
+  }
+
+  .md-field {
+    &.md-box {
+      border-radius: 4px;
+      min-height: 56px;
+      padding-top: 23px;
+
+      &:before,
+      &:after{
+        border-radius: 0 0 4px 4px;
+      }
+
+      &:after {
+        height: 2px;
+      }
+
+      .md-input,
+      .md-textarea {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      label {
+        left: 16px;
+        top: 18px;
+        margin-right: 16px;
+      }
+
+      .md-helper-text,
+      .md-error {
+        left: 16px;
+        padding-right: 16px;
+      }
+
+      .md-count {
+        right: 16px;
+        padding-left: 16px;
+      }
+
+      .md-input-action {
+        right: 8px;
+      }
+
+      > .md-icon {
+        margin-left: 16px;
+        margin-right: 16px;
+        margin-top: -8px;
+
+        &:after {
+          display: none;
+        }
+
+        ~ {
+          label {
+            left: 56px;
+          }
+
+          .md-input,
+          .md-textarea,
+          .md-file {
+            padding-left: 0px;
+            margin-left: 0px;
+          }
+        }
+      }
+
+      .md-input,
+      .md-file {
+        ~ {
+          .md-icon {
+            margin-left: 0px;
+          }
+        }
+      }
+
+      .md-textarea{
+        ~ {
+          .md-icon {
+            margin-top: 4px;
+            margin-right: 10px;
+          }
+        }
+      }
+
+      &.md-disabled {
+        &:after {
+          display: none;
+        }
+      }
+
+      &.md-focused,
+      &.md-has-value {
+        label {
+          top: 6px;
+          opacity: 1;
+        }
+      }
+
+      &.md-has-placeholder {
+        padding-top: 12px;
+        transition: padding-top .3s $md-transition-default-timing;
+        will-change: padding;
+
+        label {
+          top: 6px;
+          font-size: 12px;
+        }
+
+        .md-input {
+          font-size: 16px;
+        }
+
+        &.md-focused,
+        &.md-has-value {
+          padding-top: 23px;
+        }
+      }
+
+      &.md-inline {
+        padding-top: 12px;
+
+        &.md-focused {
+          label {
+            top: 18px;
+          }
+        }
+
+        &.md-has-value {
+          label {
+            opacity: 0;
+          }
+        }
+      }
+
+    }
+
+    &.md-raised {
+      @include md-elevation(2);
+      padding-top: 2px;
+      border-radius: 2px;
+      align-items: center;
+
+      &.md-focused {
+        z-index: 120;
+      }
+
+      &:before,
+      &:after {
+        display: none;
+      }
+
+      .md-input {
+        padding-left: 16px;
+      }
+
+      &.md-focused label,
+      label,
+      .md-input-action {
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .md-input-action {
+        right: 8px;
+      }
+
+      &.md-focused label,
+      label {
+        margin-top: 2px;
+        left: 16px;
       }
     }
   }
