@@ -35,9 +35,15 @@
     },
     props: {
       mdInline: Boolean,
+      mdNested: Boolean,
       mdLayout: {
         type: String,
-        default: 'floating'
+        default: 'normal',
+        ...MdPropValidator('md-layout', [
+          'normal',
+          'box',
+          'raised'
+        ])
       },
       mdClearable: Boolean,
       mdCounter: {
@@ -74,12 +80,6 @@
       }
     },
     computed: {
-      isFloatingLayout () {
-        return this.mdLayout === 'floating'
-      },
-      isInlineLayout () {
-        return this.mdLayout === 'inline'
-      },
       isBoxLayout () {
         return this.mdLayout === 'box'
       },
@@ -107,9 +107,10 @@
       },
       fieldClasses () {
         return {
-          'md-inline': this.mdInline || this.isRaisedLayout,
           'md-raised': this.isRaisedLayout,
           'md-box': this.isBoxLayout,
+          'md-inline': this.mdInline || this.isRaisedLayout,
+          'md-nested': this.mdNested,
           'md-clearable': this.mdClearable,
           'md-focused': this.MdField.focused,
           'md-highlight': this.MdField.highlighted,
@@ -444,6 +445,12 @@
       }
     }
 
+    .md-toolbar &.md-nested {
+      min-height: 40px;
+      height: 40px;
+      margin: 0;
+    }
+
     &.md-disabled {
       &:after {
         background: bottom left repeat-x;
@@ -557,7 +564,6 @@
 
       .md-count {
         right: 16px;
-        padding-left: 16px;
       }
 
       .md-input-action {
@@ -672,8 +678,20 @@
         display: none;
       }
 
-      .md-input {
+      .md-input,
+      &.md-autogrow .md-textarea {
         padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .md-helper-text,
+      .md-error {
+        left: 16px;
+        padding-right: 16px;
+      }
+
+      .md-count {
+        right: 16px;
       }
 
       &.md-focused label,
@@ -691,6 +709,79 @@
       label {
         margin-top: 2px;
         left: 16px;
+      }
+
+      > .md-icon {
+        margin-left: 16px;
+        margin-right: 16px;
+
+        &:after {
+          display: none;
+        }
+
+        ~ {
+          label {
+            left: 56px;
+          }
+
+          .md-input,
+          .md-textarea,
+          .md-file {
+            padding-left: 0px;
+            margin-left: 0px;
+          }
+        }
+      }
+
+      .md-input,
+      .md-file {
+        ~ {
+          .md-icon {
+            margin-left: 0px;
+          }
+        }
+      }
+
+      .md-textarea{
+        ~ {
+          .md-icon {
+            margin-right: 10px;
+          }
+        }
+      }
+
+      &.md-disabled {
+        @include md-elevation(1);
+      }
+
+      &.md-has-placeholder {
+        label {
+          display: none;
+        }
+
+        .md-input {
+          font-size: 16px;
+        }
+      }
+
+      &.md-has-textarea:not(.md-autogrow) {
+        &.md-focused label,
+        label {
+          font-size: 16px;
+          line-height: 1.3em;
+          top: 20px;
+          left: 16px;
+        }
+
+        &.md-has-value {
+          label {
+            opacity: 0;
+          }
+        }
+      }
+
+      .md-toolbar &.md-nested {
+        box-shadow: none;
       }
     }
   }
