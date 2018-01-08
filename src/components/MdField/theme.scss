@@ -52,6 +52,26 @@
         }
       }
 
+      .md-toolbar.md-primary &.md-nested {
+        &:after {
+          @include md-theme-property(background-color, text-primary, primary, .42);
+        }
+
+        &:before {
+          @include md-theme-property(background-color, text-primary, primary);
+        }
+
+        label {
+          @include md-theme-property(color, text-primary, primary, 0.42);
+        }
+
+        &.md-has-value label,
+        .md-input {
+          @include md-theme-property(color, text-primary, primary);
+        }
+
+      }
+
       &.md-box {
         background-color: rgba(#000, .06);
       }

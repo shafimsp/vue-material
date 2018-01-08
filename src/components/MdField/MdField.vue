@@ -449,6 +449,11 @@
       min-height: 40px;
       height: 40px;
       margin: 0;
+      padding-top: 4px;
+
+      label {
+          top: 10px;
+      }
     }
 
     &.md-disabled {
