@@ -109,8 +109,8 @@
         return {
           'md-raised': this.isRaisedLayout,
           'md-box': this.isBoxLayout,
-          'md-inline': this.mdInline || this.isRaisedLayout,
-          'md-nested': this.mdNested,
+          'md-inline': this.mdInline || this.isRaisedLayout || this.mdNested,
+          'md-app-bar-nested': this.mdNested,
           'md-clearable': this.mdClearable,
           'md-focused': this.MdField.focused,
           'md-highlight': this.MdField.highlighted,
@@ -445,14 +445,24 @@
       }
     }
 
-    .md-toolbar &.md-nested {
+    .md-toolbar &.md-app-bar-nested {
       min-height: 40px;
       height: 40px;
       margin: 0;
-      padding-top: 4px;
+      padding-top: 6px;
 
       label {
-          top: 10px;
+          top: 13px;
+      }
+
+      > .md-icon {
+        &:after {
+          display: none;
+        }
+      }
+
+      .md-input-action {
+        top: 6px;
       }
     }
 
@@ -666,6 +676,24 @@
         }
       }
 
+      .md-toolbar &.md-app-bar-nested {
+        min-height: 40px;
+        height: 40px;
+        margin: 0;
+        padding-top: 4px;
+
+        label {
+            top: 10px;
+        }
+
+        > .md-icon {
+          margin-top: 4px;
+        }
+
+        .md-input-action {
+          top: 4px;
+        }
+      }
     }
 
     &.md-raised {
@@ -785,8 +813,17 @@
         }
       }
 
-      .md-toolbar &.md-nested {
+      .md-toolbar &.md-app-bar-nested {
+        min-height: 40px;
+        height: 40px;
+        margin: 0;
         box-shadow: none;
+        padding-top: 0;
+
+        label {
+          top: 20px;
+          margin-top: 0;
+        }
       }
     }
   }
