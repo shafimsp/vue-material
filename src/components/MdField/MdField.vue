@@ -824,6 +824,11 @@
           top: 20px;
           margin-top: 0;
         }
+
+        .md-input-action {
+          top: 50%;
+          transform: translateY(-50%);
+        }
       }
     }
   }
