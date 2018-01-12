@@ -196,7 +196,6 @@
 
     .md-input,
     .md-textarea {
-      width: 100%;
       height: $md-input-height;
       padding: 0;
       display: block;
