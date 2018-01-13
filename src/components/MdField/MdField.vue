@@ -653,9 +653,11 @@
           font-size: 16px;
         }
 
-        &.md-focused,
-        &.md-has-value {
-          padding-top: 23px;
+        &:not(.md-inline) {
+          &.md-focused,
+          &.md-has-value {
+            padding-top: 23px;
+          }
         }
       }
 
@@ -668,6 +670,7 @@
           }
         }
 
+        &.md-has-placeholder,
         &.md-has-value {
           label {
             opacity: 0;
