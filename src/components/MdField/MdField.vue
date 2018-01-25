@@ -616,6 +616,26 @@
         }
       }
 
+      &.md-has-file {
+        &:before,
+        &:after{
+          left: 0px;
+        }
+
+        label {
+          left: 56px;
+        }
+
+        .md-input {
+          margin-left: 0px;
+        }
+
+        .md-file .md-icon {
+          margin-top: -8px;
+          margin-left: 16px;
+        }
+      }
+
       .md-textarea{
         ~ {
           .md-icon {
@@ -774,6 +794,16 @@
           .md-icon {
             margin-left: 0px;
           }
+        }
+      }
+
+      &.md-has-file {
+        .md-input {
+          margin-left: 0px;
+        }
+
+        .md-file .md-icon {
+          margin-left: 16px;
         }
       }
 
