@@ -1,5 +1,5 @@
 <template>
-  <md-field class="md-autocomplete" :class="fieldClasses" md-clearable :md-inline="isBoxLayout">
+  <md-field class="md-autocomplete" md-clearable :md-layout="mdLayout">
     <md-menu md-direction="bottom-start" :md-dense="mdDense" md-align-trigger md-full-width :md-active.sync="showMenu">
       <md-input
         v-model="searchTerm"
@@ -52,10 +52,11 @@
       mdDense: Boolean,
       mdLayout: {
         type: String,
-        default: 'floating',
+        default: 'normal',
         ...MdPropValidator('md-layout', [
-          'floating',
-          'box'
+          'normal',
+          'box',
+          'raised'
         ])
       },
       mdOpenOnFocus: {
@@ -86,16 +87,11 @@
     },
     computed: {
       isBoxLayout () {
-        return this.mdLayout === 'box'
-      },
-      fieldClasses () {
-        if (this.isBoxLayout) {
-          return 'md-autocomplete-box'
-        }
+        return this.mdLayout === 'raised'
       },
       contentClasses () {
         if (this.isBoxLayout) {
-          return 'md-autocomplete-box-content'
+          return 'md-autocomplete-raised-content'
         }
       },
       filteredStaticOptions () {
@@ -198,6 +194,7 @@
         this.$emit('md-opened')
       },
       async hideOptions () {
+        console.log('hideOptions')
         await this.$nextTick()
         this.showMenu = false
         await this.$nextTick()
@@ -205,6 +202,7 @@
         this.$emit('md-closed')
       },
       selectItem (item, $event) {
+        console.log('selectItem')
         const content = $event.target.textContent.trim()
 
         this.searchTerm = content
@@ -287,14 +285,19 @@
     }
   }
 
-  .md-autocomplete-box-content:after {
-    height: 6px;
-    position: absolute;
-    top: -6px;
-    right: 0;
-    left: 0;
-    z-index: 120;
-    border-bottom: 1px solid;
-    content: "";
+  .md-autocomplete-raised-content {
+    margin-top: 6px;
+    margin-left: 1px;
+
+    &:after {
+      height: 6px;
+      position: absolute;
+      top: -6px;
+      right: 0;
+      left: 0;
+      z-index: 120;
+      border-bottom: 1px solid;
+      content: "";
+    }
   }
 </style>

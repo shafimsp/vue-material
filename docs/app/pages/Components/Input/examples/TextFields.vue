@@ -22,8 +22,8 @@
     </md-field>
 
     <md-field md-inline>
-      <label>Inline</label>
       <md-input v-model="inline"></md-input>
+      <label>Inline</label>
     </md-field>
 
     <md-field>
