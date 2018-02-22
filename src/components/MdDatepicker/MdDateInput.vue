@@ -31,7 +31,7 @@
   import MdFieldMixin from '../MdField/MdFieldMixin'
 
   export default {
-    name: 'MdDatepicker',
+    name: 'MdDateInput',
     components: {
       MdOverlay,
       MdInput,
