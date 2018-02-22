@@ -1,6 +1,10 @@
 <template>
   <div>
-    <md-datepicker v-model="selectedDate" />
+    <md-field>
+      <md-icon @click.native="toggleDialog">event</md-icon>
+      <md-date-input ref="input" v-model="selectedDate" />
+    </md-field>
+
     <md-field>
       <label for="movie">First day of a week</label>
       <md-select v-model="firstDayOfAWeek">
@@ -26,6 +30,11 @@
         set (val) {
           this.$material.locale.firstDayOfAWeek = val
         }
+      }
+    },
+    methods: {
+      toggleDialog () {
+        this.$refs.input.toggleDialog()
       }
     }
   }
